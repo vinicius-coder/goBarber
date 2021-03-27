@@ -3,6 +3,12 @@ import CreateUserService from '../service/CreateUserService';
 
 const usersRouter = Router();
 
+interface UserDTO {
+    name: string,
+    email: string,
+    password?: string
+}
+
 usersRouter.post('/', async (request, response) => {
 
     try {
@@ -13,9 +19,17 @@ usersRouter.post('/', async (request, response) => {
             name,
             email,
             password
-        })
+        });
 
-        return response.status(201).json(user);
+        const userWithoutPassword = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            created_at: user.created_at,
+            updated_at: user.updated_at,
+        };
+
+        return response.status(201).json(userWithoutPassword);
 
     } catch (err) {
         return response.status(400).json({ error: err.message });
