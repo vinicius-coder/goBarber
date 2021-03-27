@@ -3,12 +3,6 @@ import CreateUserService from '../service/CreateUserService';
 
 const usersRouter = Router();
 
-interface UserDTO {
-    name: string,
-    email: string,
-    password?: string
-}
-
 usersRouter.post('/', async (request, response) => {
 
     try {
