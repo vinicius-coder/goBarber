@@ -11,7 +11,6 @@ const usersRouter = Router();
 const upload = multer(uploadConfig)
 
 usersRouter.post('/', async (request, response) => {
-
  
         const { name, email, password } = request.body;
         const createUser = new CreateUserService();
@@ -22,7 +21,7 @@ usersRouter.post('/', async (request, response) => {
             password
         });
 
-        const userWithoutPassword = {
+        const userDTO = {
             id: user.id,
             name: user.name,
             email: user.email,
@@ -30,7 +29,7 @@ usersRouter.post('/', async (request, response) => {
             updated_at: user.updated_at,
         };
 
-        return response.status(201).json(userWithoutPassword);
+        return response.status(201).json(userDTO);
 
   
 })
@@ -55,7 +54,7 @@ usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), async
             avatarFilename: request.file.filename,
         })
 
-        const userWithoutPassword = {
+        const userDTO = {
             id: user.id,
             name: user.name,
             email: user.email,
@@ -64,7 +63,7 @@ usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), async
             updated_at: user.updated_at,
         };
 
-        return response.json(userWithoutPassword);
+        return response.json(userDTO);
 
 })
 

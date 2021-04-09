@@ -5,8 +5,6 @@ const sessionsRouter = Router();
 
 sessionsRouter.post('/', async (request, response) => {
 
-    
-
         const { email, password } = request.body;
 
         const authenticate = new AuthenticatedUserService;
@@ -16,7 +14,7 @@ sessionsRouter.post('/', async (request, response) => {
             password
         });
 
-        const userWithoutPassword = {
+        const userDTO = {
             id: user.id,
             name: user.name,
             email: user.email,
@@ -24,7 +22,7 @@ sessionsRouter.post('/', async (request, response) => {
             updated_at: user.updated_at,
         };
 
-        return response.json({ userWithoutPassword, token });
+        return response.json({ userDTO, token });
 
 })
 
