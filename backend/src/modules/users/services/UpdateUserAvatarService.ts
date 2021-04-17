@@ -1,16 +1,17 @@
+import fs from 'fs';
+import uploadConfig from '@config/upload';
 import { getRepository } from "typeorm";
-import User from "../models/Users";
 
 import path from 'path';
-import uploadConfig from '../config/upload';
-import fs from 'fs';
-import AppError from "../errors/AppError";
+
+import AppError from "@shared/errors/AppError";
+
+import User from "../infra/typeorm/entities/Users";
 
 interface Request {
     user_id: string;
     avatarFilename: string;
 }
-
 
 class UpdateUserAvatarService {
 
